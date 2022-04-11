@@ -65,11 +65,11 @@ export class ItemListPage implements OnInit {
     this.current_district = '';
     console.log('will leave ' + this.current_district);
     this.filtro_activo = false;
-    this.mapa_activo = false;
-    /*if (this.map) {
+    if (this.mapa_activo) {
       this.map.off();
       this.map.remove();
-    }*/
+    }    
+    this.mapa_activo = false;
 
   }
 
@@ -213,7 +213,7 @@ export class ItemListPage implements OnInit {
   }
 
   verEnMapa(){
-    if(this.map){
+    if(this.mapa_activo){
       this.map.off();
       this.map.remove();
       this.mapa_activo=false;
@@ -224,7 +224,7 @@ export class ItemListPage implements OnInit {
       console.log('abril')
     }    
    
-    this.listaItems.forEach(item =>{
+   this.listaItems.forEach(item =>{
       if(item.location){        
         L.marker([item.location.latitude, item.location.longitude]).addTo(this.map);
       }
