@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="title">{{ itemTypeService.itemType }}</ion-title>
+    <fa-icon icon="filter" slot="end" (click)="cambiarEstadoFiltrar()"></fa-icon>
+    <fa-icon icon="map" slot="end" (click)="verEnMapa()"></fa-icon>
+  </ion-toolbar>
+</ion-header>
+
+<!--SIN FILTRO-->
+<ion-content *ngIf="!filtrar && !filtro_activo">  
+
+  <div class="map-container">
+    <div class="map-frame">
+      <div id="map"></div>
+    </div>
+  </div>
+
+<div ><!--*ngIf="!mapa_activo"-->
+  <ion-card *ngFor="let item of listaItems" [routerLink]="['/ficha-item']" (click)="comunicarDatos(item.id)">
+    <ion-item href="#" class="ion-activated" color="primary">
+      <fa-icon [icon]="currentIcon"></fa-icon>
+      <div class="card-text">
+        <ion-label class="item-name">{{item.title}}</ion-label>
+        <p *ngIf="item.district" class="district-text">Distrito: {{item.district}}</p>
+      </div>
+    </ion-item>
+  </ion-card>
+</div>
+
+</ion-content>
+
+<!--CON FILTRO-->
+
+<ion-content *ngIf="filtro_activo == true">  
+  <ion-card *ngFor="let item of listaItems_aux">
+    <ion-item href="#" class="ion-activated" color="primary">
+      <fa-icon [icon]="currentIcon"></fa-icon>
+      <div class="card-text">
+        <ion-label class="item-name">{{item.title}}</ion-label>
+        <p *ngIf="item.district" class="district-text">Distrito: {{item.district}}</p>
+      </div>
+    </ion-item>
+  </ion-card>
+</ion-content>
+
+<!--DESPLIEGA FILTRO-->
+<ion-content *ngIf="filtrar == true" >
+  <ion-radio-group value="biff" (ionChange)="filtrarListaItems($event)" color="primary">
+    <ion-list-header>
+      <ion-label>Distrito</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Centro</ion-label>
+      <ion-radio slot="start" value="Centro"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Arganzuela</ion-label>
+      <ion-radio slot="start" value="Arganzuela"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Retiro</ion-label>
+      <ion-radio slot="start" value="Retiro"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Salamanca</ion-label>
+      <ion-radio slot="start" value="Salamanca"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Chamartín</ion-label>
+      <ion-radio slot="start" value="Chamartin"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tetuán</ion-label>
+      <ion-radio slot="start" value="Tetuan"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Chamberí</ion-label>
+      <ion-radio slot="start" value="Chanberi"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fuencarral-El Pardo</ion-label>
+      <ion-radio slot="start" value="Fuencarral"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Moncloa-Aravaca</ion-label>
+      <ion-radio slot="start" value="Moncloa-Aravaca"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Latina</ion-label>
+      <ion-radio slot="start" value="Latina"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Carabanchel</ion-label>
+      <ion-radio slot="start" value="Carabanchel"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Usera</ion-label>
+      <ion-radio slot="start" value="Usera"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Puente de Vallecas</ion-label>
+      <ion-radio slot="start" value="PuenteDeVallecas"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Moratalaz</ion-label>
+      <ion-radio slot="start" value="Moratalaz"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Ciudad Lineal</ion-label>
+      <ion-radio slot="start" value="CiudadLineal"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Hortaleza</ion-label>
+      <ion-radio slot="start" value="Hortaleza"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Villaverde</ion-label>
+      <ion-radio slot="start" value="Villaverde"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Villa de Vallecas</ion-label>
+      <ion-radio slot="start" value="VillaDeVallecas"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Vicálvaro</ion-label>
+      <ion-radio slot="start" value="Vicálvaro"></ion-radio>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>San Blas-Canillejas</ion-label>
+      <ion-radio slot="start" value="SanBlas-Canillejas"></ion-radio>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Barajas</ion-label>
+      <ion-radio slot="start" value="Barajas"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+
+  <!--VER EN MAPA-->
+
+ 
+</ion-content>
+

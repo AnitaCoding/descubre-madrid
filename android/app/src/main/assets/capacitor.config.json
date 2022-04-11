@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "descubre-madrid",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

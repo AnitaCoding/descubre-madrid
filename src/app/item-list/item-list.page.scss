@@ -1,0 +1,43 @@
+.title{
+    font-size: 1rem;
+    text-transform: capitalize;
+    padding-left: 0rem;
+}
+
+.ng-fa-icon{
+    padding-right: 1rem;
+}
+
+.card-text{
+    display:flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+.item-name{
+    font-size: 0.8rem;
+}
+
+.district-text{
+    font-size: 0.7rem;
+}
+
+.map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    //margin: 30px;
+}
+  
+.map-frame {
+    height: 100%;
+}
+  
+#map {
+    height: 100%;
+}
+
+.leaflet-container{
+    background-color: #ffffff;
+}

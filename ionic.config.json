@@ -1,0 +1,7 @@
+{
+  "name": "descubre-madrid",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

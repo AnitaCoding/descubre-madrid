@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="menu">
+    <ion-title class="title">
+      Descubre Madrid
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header color="menu" collapse="condense">
+    <ion-toolbar >
+      <ion-title size="large">Descubre Madrid</ion-title>
+    </ion-toolbar>
+  </ion-header>
+<div id="container">
+  <!--<ion-button class="body-button" expand="block" size="large" [routerLink]="['/item-list']" (click)="actualizaItemType('monumentos')"><div class="ion-justify-content-start"><fa-icon icon="monument"></fa-icon></div>Monumentos</ion-button>
+  <ion-button class="body-button" expand="block" size="large" [routerLink]="['/item-list']" (click)="actualizaItemType('edificios')"><fa-icon icon="landmark-dome"></fa-icon>Edificios</ion-button>
+  <ion-button class="body-button" expand="block" size="large" [routerLink]="['/item-list']" (click)="actualizaItemType('museos')"><fa-icon icon="building-columns"></fa-icon>Museos</ion-button>
+  <ion-button class="body-button" expand="block" size="large" [routerLink]="['/item-list']" (click)="actualizaItemType('parques')"><fa-icon icon="tree"></fa-icon>Parques y jardines</ion-button>
+  <ion-button class="body-button" expand="block" size="large" [routerLink]="['/item-list']" (click)="actualizaItemType('info-turistica')"><fa-icon icon="circle-info"></fa-icon>Oficinas de turismo</ion-button>
+  <ion-button class="body-button" expand="block" size="large" [routerLink]="['/item-list']" (click)="actualizaItemType('todos')"><fa-icon icon="globe"></fa-icon>Todos</ion-button>
+  -->
+
+  <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('monumentos')">
+    <ion-item color="primary" class="ion-activated body-button">
+      <fa-icon icon="monument"></fa-icon>
+      <ion-label>Monumentos</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('edificios')">
+    <ion-item color="primary" href="#" class="ion-activated body-button">
+      <fa-icon icon="landmark-dome"></fa-icon>
+      <ion-label>Edificios</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('museos')">
+    <ion-item color="primary" href="#" class="ion-activated body-button">
+      <fa-icon icon="building-columns"></fa-icon>
+      <ion-label>Museos</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('parques')">
+    <ion-item color="primary" href="#" class="ion-activated body-button">
+      <fa-icon icon="tree"></fa-icon>
+      <ion-label>Parques y jardines</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('oficinas de turismo')">
+    <ion-item color="primary" href="#" class="ion-activated body-button">
+      <fa-icon icon="circle-info"></fa-icon>
+      <ion-label>Oficinas de turismo</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('todos')">
+    <ion-item color="primary" href="#" class="ion-activated body-button">
+      <fa-icon icon="globe"></fa-icon>
+      <ion-label>Todos</ion-label>
+    </ion-item>
+  </ion-card>
+
+</div>
+
+  <!--<app-explore-container name="Tab 1 page"></app-explore-container>-->
+</ion-content>
