@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
-    <ion-title class="title">{{ itemTypeService.itemType }}</ion-title>
+    <ion-title class="title">{{ itemType }}</ion-title>
     <fa-icon icon="filter" slot="end" (click)="cambiarEstadoFiltrar()"></fa-icon>
     <fa-icon icon="map" slot="end" (click)="verEnMapa()"></fa-icon>
   </ion-toolbar>
@@ -21,7 +21,7 @@
 <div ><!--*ngIf="!mapa_activo"-->
   <ion-card *ngFor="let item of listaItems" [routerLink]="['/ficha-item']" (click)="comunicarDatos(item.id)">
     <ion-item href="#" class="ion-activated" color="primary">
-      <fa-icon [icon]="currentIcon"></fa-icon>
+      <fa-icon [icon]="item.icon"></fa-icon>
       <div class="card-text">
         <ion-label class="item-name">{{item.title}}</ion-label>
         <p *ngIf="item.district" class="district-text">Distrito: {{item.district}}</p>
@@ -32,9 +32,9 @@
 
 </ion-content>
 
-<!--CON FILTRO-->
+<!--CON FILTRO OK-->
 
-<ion-content *ngIf="filtro_activo == true">  
+<ion-content *ngIf="filtro_activo == true && listaItems_aux.length != 0">  
   <ion-card *ngFor="let item of listaItems_aux">
     <ion-item href="#" class="ion-activated" color="primary">
       <fa-icon [icon]="currentIcon"></fa-icon>
@@ -46,7 +46,19 @@
   </ion-card>
 </ion-content>
 
-<!--DESPLIEGA FILTRO-->
+<!--CON FILTRO KO-->
+<ion-content *ngIf="filtro_activo == true && listaItems_aux.length == 0" fullscreen> 
+  <ion-card color="primary">
+    <ion-card-header>
+      <ion-card-title>No hay {{itemType.toLowerCase()}} en {{current_district}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Intente una nueva búsqueda, o consulte otro distrito.
+    </ion-card-content>
+  </ion-card> 
+</ion-content>
+
+<!--DESPLIEGA FILTRO
 <ion-content *ngIf="filtrar == true" >
   <ion-radio-group value="biff" (ionChange)="filtrarListaItems($event)" color="primary">
     <ion-list-header>
@@ -158,9 +170,19 @@
     </ion-item>
   </ion-radio-group>
 
+  
 
-  <!--VER EN MAPA-->
+
+  VER EN MAPA
 
  
+</ion-content>-->
+
+<ion-content *ngIf="filtrar == true" fullscreen> 
+  <ion-card *ngFor="let distrito of array_distritos" color="primary" class="body-button" [routerLink]="['/item-list']" (click)="filtrarListaItems(distrito[1])">
+    <ion-card-header>
+      <ion-card-title class="button-title">{{distrito[0]}}</ion-card-title>
+    </ion-card-header>
+  </ion-card> 
 </ion-content>
 

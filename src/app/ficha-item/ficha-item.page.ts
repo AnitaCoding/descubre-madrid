@@ -13,23 +13,13 @@ import { TtsService } from '../services/tts.service';
 export class FichaItemPage implements OnInit {
 
   itemSeleccionado: Item;
+  backLink:string;
+
+  //TODO: No tengo que desactivar el botón.
+  //Cambiar el icono de corazón por una X o algo para quitarlo de favoritos
+  almacenado: boolean;
 
  private map:any;
-
-  private initMap(): void {
-    this.map = L.map('map', {
-      center: [this.itemSeleccionado.location.latitude, this.itemSeleccionado.location.longitude],
-      zoom: 13
-    });
-
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      minZoom: 3,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    });
-
-    tiles.addTo(this.map);
-  }
 
   constructor(public servicio_comunica_datos: ComunicarDatosItemService,
     private servicio_tts:TtsService) {
@@ -38,7 +28,13 @@ export class FichaItemPage implements OnInit {
     
   }
 
-  ngOnInit() {  }
+  ngOnInit() { 
+    this.comprobarFavoritos();
+   }
+
+  ionViewWillEnter(){
+    this.backLink  = localStorage.getItem('Back-link');
+  }
 
   ionViewDidEnter(){
     this.actualizarItem();    
@@ -53,6 +49,23 @@ export class FichaItemPage implements OnInit {
     }
   }
 
+  initMap(): void {
+    this.map = L.map('map', {
+      center: [this.itemSeleccionado.location.latitude, this.itemSeleccionado.location.longitude],
+      zoom: 13
+    });
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      minZoom: 3,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+
+    tiles.addTo(this.map);
+
+    console.log('mapa creado')
+  }
+
   actualizarItem(){
     if(this.itemSeleccionado.title!=''){
       this.itemSeleccionado = this.servicio_comunica_datos.currentItem;
@@ -62,5 +75,28 @@ export class FichaItemPage implements OnInit {
   escuchar(){
     this.servicio_tts.discurso(this.itemSeleccionado.organization['organization-desc'])
   }
+
+  almacenarFavoritos(){
+    let lista_favoritos = new Array();
+    lista_favoritos.push(this.itemSeleccionado)
+    if(!localStorage.getItem('lista_favoritos')){
+      localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
+    }else{
+      lista_favoritos = JSON.parse(localStorage.getItem('lista_favoritos'));
+      lista_favoritos.push(this.itemSeleccionado);
+      localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
+    }
+  }
+
+  comprobarFavoritos(){
+    let lista_favoritos = new Array();
+    lista_favoritos = JSON.parse(localStorage.getItem('lista_favoritos'));
+    lista_favoritos.forEach(item=>{
+      if(item.id == this.itemSeleccionado.id){
+        this.almacenado = true;
+      }
+    })
+  }
+
 
 }

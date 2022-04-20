@@ -17,6 +17,10 @@ const routes: Routes = [
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
       {
+        path: 'favoritos',
+        loadChildren: () => import('../favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+      },
+      {
         path: 'insignias',
         loadChildren: () => import('../insignias/insignias.module').then( m => m.InsigniasPageModule)
       },

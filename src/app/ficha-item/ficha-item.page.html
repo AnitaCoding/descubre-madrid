@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="menu">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="item-list" icon="chevron-back-outline"></ion-back-button>
+      <ion-back-button [defaultHref]="backLink" icon="chevron-back-outline"></ion-back-button>
     </ion-buttons>
     <ion-title class="title">{{itemSeleccionado.title}}</ion-title>
   </ion-toolbar>
@@ -15,10 +15,10 @@
   </div>
 
   <div class="action-box">
-    <ion-button color="primary"><fa-icon icon="heart"></fa-icon></ion-button>
+    <ion-button color="primary" (click)="almacenarFavoritos()" [disabled]="almacenado"><fa-icon icon="heart"></fa-icon></ion-button>
     <ion-button color="primary"><fa-icon icon="headphones-simple" (click)="escuchar()"></fa-icon></ion-button>
     <ion-button color="primary"><fa-icon icon="location-dot"></fa-icon></ion-button>
-    <ion-button color="primary"><fa-icon icon="circle-info"></fa-icon></ion-button>
+    <ion-button color="primary" href={{itemSeleccionado.references}}><fa-icon icon="circle-info"></fa-icon></ion-button>
   </div>
   
   <ion-card color="primary">
@@ -30,7 +30,8 @@
       <p class="info-p">Distrito: {{itemSeleccionado.district}}</p>
       <p class="info-p">Barrio: {{itemSeleccionado.area}}</p>
       <p class="info-p">Dirección: {{itemSeleccionado.address['street-address']}}</p>
-      <p class="info-p">{{itemSeleccionado.organization['organization-desc']}}</p>
+      <p class="info-p" *ngIf="itemSeleccionado.organization">{{itemSeleccionado.organization['organization-desc']}}</p>
+      <p class="info-p" *ngIf="!itemSeleccionado.organization['organization-desc']">{{itemSeleccionado.organization}}</p>
     </ion-card-content>
   </ion-card>
 

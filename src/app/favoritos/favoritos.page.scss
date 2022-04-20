@@ -25,28 +25,7 @@ ion-card{
     font-size: 0.7rem;
 }
 
-.button-title{
-    font-size: 1rem;
-    text-align:center;
-  }
-
-.map-container {
+.trash{
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    //margin: 30px;
-}
-  
-.map-frame {
-    height: 100%;
-}
-  
-#map {
-    height: 100%;
-}
-
-.leaflet-container{
-    background-color: #ffffff;
+    right:1rem;
 }

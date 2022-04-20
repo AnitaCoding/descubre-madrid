@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="menu">
+    <ion-title class="title">Favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--EXISTE LISTA-->
+<ion-content *ngIf="lista_favoritos.length != 0">
+  <ion-card *ngFor="let item of lista_favoritos" [routerLink]="['/ficha-item']" (click)="comunicarDatos(item.id)"><!--(click)="comunicarDatos(item.id)"-->
+    <ion-item href="#" class="ion-activated" color="primary">
+      
+      <fa-icon [icon]="item.icon"></fa-icon>
+      <div class="card-text">
+        <ion-label class="item-name">{{item.title}}</ion-label>
+        <p *ngIf="item.district" class="district-text">Distrito: {{item.district}}</p>
+      </div>
+
+      <fa-icon class="trash" icon = "trash" [routerLink]="['/favoritos']" (click)="eliminarFavorito(item.id)"></fa-icon>
+      
+    </ion-item>
+  </ion-card>
+
+</ion-content>
+
+<!--NO EXISTE LISTA-->
+<ion-content>
+
+</ion-content>
