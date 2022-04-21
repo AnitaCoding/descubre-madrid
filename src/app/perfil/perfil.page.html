@@ -1,11 +1,47 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-    </ion-buttons>
-    <ion-title>perfil</ion-title>
+  <ion-toolbar color="menu">
+    <ion-title class="title">Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <div id="container">
+   
+    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('monumentos')">
+      <ion-item color="primary" class="ion-activated body-button">
+        <fa-icon icon="monument"></fa-icon>
+        <ion-label>Monumentos</ion-label>
+      </ion-item>
+    </ion-card>
+  
+    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('edificios')">
+      <ion-item color="primary" href="#" class="ion-activated body-button">
+        <fa-icon icon="landmark-dome"></fa-icon>
+        <ion-label>Edificios</ion-label>
+      </ion-item>
+    </ion-card>
+  
+    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('museos')">
+      <ion-item color="primary" href="#" class="ion-activated body-button">
+        <fa-icon icon="building-columns"></fa-icon>
+        <ion-label>Museos</ion-label>
+      </ion-item>
+    </ion-card>
+  
+    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('parques')">
+      <ion-item color="primary" href="#" class="ion-activated body-button">
+        <fa-icon icon="tree"></fa-icon>
+        <ion-label>Parques y jardines</ion-label>
+      </ion-item>
+    </ion-card>
+  
+    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('oficinas de turismo')">
+      <ion-item color="primary" href="#" class="ion-activated body-button">
+        <fa-icon icon="circle-info"></fa-icon>
+        <ion-label>Oficinas de turismo</ion-label>
+      </ion-item>
+    </ion-card>  
+  </div>
 
 </ion-content>

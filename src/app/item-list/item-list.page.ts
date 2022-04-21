@@ -335,7 +335,7 @@ export class ItemListPage implements OnInit {
     this.listaItems.forEach(item=>{
       if(id == item.id){
         this.servicio_comunica_datos.currentItem = item;
-        console.log(this.servicio_comunica_datos.currentItem.title);
+        console.log('it l' + this.servicio_comunica_datos.currentItem.id);
       }
     })
   }

@@ -15,14 +15,14 @@
   </div>
 
   <div class="action-box">
-    <ion-button color="primary" (click)="almacenarFavoritos()" [disabled]="almacenado"><fa-icon icon="heart"></fa-icon></ion-button>
+    <ion-button *ngIf="!almacenado" color="primary" (click)="almacenarFavoritos()"><fa-icon icon="heart"></fa-icon></ion-button>
+    <ion-button *ngIf="almacenado" color="primary" (click)="almacenarVisitados()"><fa-icon icon="check"></fa-icon></ion-button>
     <ion-button color="primary"><fa-icon icon="headphones-simple" (click)="escuchar()"></fa-icon></ion-button>
     <ion-button color="primary"><fa-icon icon="location-dot"></fa-icon></ion-button>
     <ion-button color="primary" href={{itemSeleccionado.references}}><fa-icon icon="circle-info"></fa-icon></ion-button>
   </div>
   
   <ion-card color="primary">
-    <!--<img src="./madison.jpg" />-->
     <ion-card-header>
       <ion-card-title class="item-title">{{itemSeleccionado.title}}</ion-card-title>
     </ion-card-header>

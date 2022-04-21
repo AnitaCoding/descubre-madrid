@@ -29,15 +29,18 @@ export class FichaItemPage implements OnInit {
   }
 
   ngOnInit() { 
-    this.comprobarFavoritos();
+    
    }
 
   ionViewWillEnter(){
-    this.backLink  = localStorage.getItem('Back-link');
+    this.backLink  = localStorage.getItem('Back-link');    
+    this.actualizarItem();    
+    this.almacenado=false;
+    this.comprobarFavoritos();
+    console.log(this.itemSeleccionado.id)
   }
 
-  ionViewDidEnter(){
-    this.actualizarItem();    
+  ionViewDidEnter(){    
     this.initMap();
  
   }
@@ -47,12 +50,13 @@ export class FichaItemPage implements OnInit {
       this.map.off();
       this.map.remove();
     }
+    
   }
 
   initMap(): void {
     this.map = L.map('map', {
       center: [this.itemSeleccionado.location.latitude, this.itemSeleccionado.location.longitude],
-      zoom: 13
+      zoom: 15
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -86,6 +90,19 @@ export class FichaItemPage implements OnInit {
       lista_favoritos.push(this.itemSeleccionado);
       localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
     }
+  }
+
+  almacenarVisitados(){
+    let lista_visitados = new Array();
+    lista_visitados.push(this.itemSeleccionado);
+    if(!localStorage.getItem('lista_visitados')){
+      localStorage.setItem('lista_visitados', JSON.stringify(lista_visitados))
+    }else{
+      lista_visitados = JSON.parse(localStorage.getItem('lista_visitados'));
+      lista_visitados.push(this.itemSeleccionado);
+      localStorage.setItem('lista_visitados', JSON.stringify(lista_visitados))
+    }
+    
   }
 
   comprobarFavoritos(){
