@@ -92,6 +92,8 @@ export class FichaItemPage implements OnInit {
     }
   }
 
+  //TODO:revisar esto, hay que almacenarlos por tipo de item
+
   almacenarVisitados(){
     let lista_visitados = new Array();
     lista_visitados.push(this.itemSeleccionado);

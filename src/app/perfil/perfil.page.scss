@@ -26,11 +26,44 @@
   #container a {
     text-decoration: none;
   }
-  
-.title, .body-button{
+
+  .header{
+      padding-top: 5rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+  }
+
+  h1{
+      padding-right: 1rem;
+  }
+
+  .title, .body-button{
     font-size: 1.2rem;
     text-transform: none;
   }
+
+  .resumen-visitados {
+    display: flex;
+    justify-content: center;
+    padding: 0.7rem;
+   }
+
+   h2{
+       font-size: 1rem;
+   }
+
+  .box-visitados{
+      display: flex;
+      flex-direction: column;
+      padding: 0 1.5rem;
+      border-right: 0.1rem solid #000;
+  }
+
+  .box-visitados:last-child{
+      border: none;
+  }
+   
   
   .body-button{
     padding: 0.4rem;
@@ -43,6 +76,10 @@
     box-shadow: 0px 4px 10px 0 rgba(0, 61, 246, 0.4);
   }
 
-  .ng-fa-icon{
-    padding-right: 1rem;
+  ion-label{
+      padding-left: 1rem;
   }
+
+  /*.ng-fa-icon{
+    padding-right: 1rem;
+  }*/
