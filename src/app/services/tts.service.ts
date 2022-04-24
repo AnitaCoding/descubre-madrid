@@ -9,7 +9,10 @@ export class TtsService {
   constructor(private tts:TextToSpeech) { }
 
   discurso(texto:string){
-    this.tts.speak(texto)
+    this.tts.speak({
+      text: texto,
+      locale: 'es'
+    })
     .then(()=>console.log('Success'))
     .catch((resp:any)=>console.log(resp))
   }

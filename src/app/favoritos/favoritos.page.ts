@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../models/item';
 import { ComunicarDatosItemService } from '../services/comunicar-datos-item.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -10,8 +11,10 @@ import { ComunicarDatosItemService } from '../services/comunicar-datos-item.serv
 export class FavoritosPage implements OnInit {
   lista_favoritos: Array<Item>
   backLink: string = 'favoritos';
-  constructor(public servicio_comunica_datos: ComunicarDatosItemService) {
-    this.existeLista();
+  constructor(public servicio_comunica_datos: ComunicarDatosItemService,
+    private storage_service: StorageService) {
+    //this.existeLista();
+    this.lista_favoritos = new Array<Item>();
    }
 
   ngOnInit() {
@@ -19,15 +22,26 @@ export class FavoritosPage implements OnInit {
 
   ionViewWillEnter(){
     this.existeLista();
-    localStorage.setItem('Back-link', this.backLink);
+    this.storage_service.set('BackLink', this.backLink)
+    //localStorage.setItem('Back-link', this.backLink);
+    console.log('will enter fav')
 
   }
 
-  existeLista(){
-    if(localStorage.getItem('lista_favoritos')){
-      this.lista_favoritos= JSON.parse(localStorage.getItem('lista_favoritos'));
+  ionViewDidLeave(){
+    this.lista_favoritos=[];
+  }
+
+  async existeLista(){
+    //if(localStorage.getItem('lista_favoritos'))
+    if(await this.storage_service.get('listaFavoritos')==null/*|| await this.storage_service.get('listaFavoritos').length==0*/)
+    {
+      alert('añade favoritos')
+      //this.storage_service.set('listaFavoritos', JSON.stringify(this.lista_favoritos))
+      //this.lista_favoritos= JSON.parse(localStorage.getItem('lista_favoritos'));
     }else{
-      localStorage.setItem ('lista_favoritos',JSON.stringify(this.lista_favoritos))
+      this.lista_favoritos = JSON.parse(await this.storage_service.get('listaFavoritos'))
+      //localStorage.setItem ('lista_favoritos',JSON.stringify(this.lista_favoritos))
     }
   }
 
@@ -35,23 +49,28 @@ export class FavoritosPage implements OnInit {
     this.lista_favoritos.forEach(item=>{
       if(id == item.id){
         this.servicio_comunica_datos.currentItem = item;
-        console.log(this.servicio_comunica_datos.currentItem.title);
       }
     })
   }
 
   eliminarFavorito(id:string){
     let i:number = 0;
-    this.lista_favoritos.forEach(item=>{
-      if(item.id == id){
+    if(this.lista_favoritos.length <=1){
+      this.storage_service.remove('listaFavoritos')
+    }else{
+      this.lista_favoritos.forEach(item=>{
+        if(item.id == id){
+  
+          this.lista_favoritos.splice(i,1);
+          this.storage_service.set('listaFavoritos', JSON.stringify(this.lista_favoritos))
+          //localStorage.setItem('lista_favoritos', JSON.stringify(this.lista_favoritos))
+  
+        }
+        i++;
+      })
 
-        this.lista_favoritos.splice(i,1);
-        console.log(this.lista_favoritos)
-        localStorage.setItem('lista_favoritos', JSON.stringify(this.lista_favoritos))
-
-      }
-      i++;
-    })
+    }
+    
   }
 
 }

@@ -9,6 +9,7 @@ import { PerfilPageRoutingModule } from './perfil-routing.module';
 import { PerfilPage } from './perfil.page';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     IonicModule,
     FontAwesomeModule,
     PerfilPageRoutingModule
-  ],
-  declarations: [PerfilPage]
+    ],
+  declarations: [PerfilPage],
 })
 export class PerfilPageModule {}

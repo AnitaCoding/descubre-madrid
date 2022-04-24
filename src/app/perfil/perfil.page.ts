@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../models/item';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-perfil',
@@ -17,15 +18,18 @@ export class PerfilPage implements OnInit {
   nPInfoVisitados: number;
   lista_visitados: Array<Array<Item>>;
 
-  constructor() {
+  constructor(private storage_service:StorageService) {
     this.actualizarNombreUsuario();
    }
 
   ngOnInit() {
+
   }
 
-  ionViewWillEnter(){
-    this.lista_visitados = JSON.parse(localStorage.getItem('lista_visitados'));
+  async ionViewWillEnter(){
+    this.lista_visitados = JSON.parse(await this.storage_service.get('listaVisitados'));
+
+    //this.lista_visitados = JSON.parse(localStorage.getItem('lista_visitados'));
     
     this.nMonumentosVisitados = this.lista_visitados.length;
     this.nEdificiosVisitados = this.lista_visitados.length;

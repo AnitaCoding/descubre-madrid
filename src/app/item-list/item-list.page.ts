@@ -9,6 +9,7 @@ import { ComunicarDatosItemService } from '../services/comunicar-datos-item.serv
 import { Geolocation, Position } from '@capacitor/geolocation';
 import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { LoadingController, Platform } from '@ionic/angular';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-item-list',
@@ -46,7 +47,8 @@ export class ItemListPage implements OnInit {
     public servicio_comunica_datos: ComunicarDatosItemService,
     private diagnostic: Diagnostic,
     private platform:Platform,
-    private loading:LoadingController) {
+    private loading:LoadingController,
+    private storage_service:StorageService) {
       this.array_distritos = [['Centro', 'Centro'], ['Arganzuela', 'Arganzuela'], ['Retiro', 'Retiro'], 
       ['Salamanca', 'Salamanca'], ['Chamartín', 'Chamartin'], ['Tetuán', 'Tetuan'], ['Chamberí', 'Chamberi'], 
       ['Fuencarral-El Pardo', 'Fuencarral-ElPardo'], ['Moncloa', 'Moncloa'], ['Latina', 'Latina'], ['Carabanchel', 'Carabanchel'], 
@@ -61,7 +63,8 @@ export class ItemListPage implements OnInit {
   }
 
   ionViewWillEnter(){
-    localStorage.setItem('Back-link', this.backLink)
+    this.storage_service.set('BackLink', this.backLink)
+    //localStorage.setItem('Back-link', this.backLink)
     this.presentLoading(this.mensajeEspera);
     console.log('ionViewWillEnter');
     this.listaItems = new Array<Item>();
