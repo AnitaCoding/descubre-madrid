@@ -254,6 +254,8 @@ export class ItemListPage implements OnInit {
     this.listaItems = <Array<Item>>respuesta['@graph'];
     //Ordenamos alfabéticamente
     this.listaItems.forEach(item => item.icon = icon);
+    
+    this.actualizarTipoItem();
     this.ordenarAlfabeticamente();
     this.prevencionDeErrores();
   }
@@ -266,6 +268,8 @@ export class ItemListPage implements OnInit {
 
   mostrarTodos(respuesta:any, icon:IconProp){
     this.listaItems_aux=<Array<Item>>respuesta['@graph'];
+    
+    this.actualizarTipoItem();
     this.setItemIcon(icon)    
     this.sumaItems();
     this.ordenarAlfabeticamente();
@@ -332,6 +336,10 @@ export class ItemListPage implements OnInit {
 
     }  
 
+  }
+
+  actualizarTipoItem(){
+    this.listaItems.forEach(item => item.tipoItem = this.itemType)
   }
 
   comunicarDatos(id:string){

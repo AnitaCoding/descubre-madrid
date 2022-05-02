@@ -4,6 +4,7 @@ import { ComunicarDatosItemService } from '../services/comunicar-datos-item.serv
 import * as L from 'leaflet';
 import { TtsService } from '../services/tts.service';
 import { StorageService } from '../services/storage.service';
+import { ItemTypeService } from '../services/item-type.service';
 
 
 @Component({
@@ -16,14 +17,18 @@ export class FichaItemPage implements OnInit {
   itemSeleccionado: Item;
   backLink:string = 'item-list';
   almacenado: boolean;
+  itemType: string = '';
+  isVisitado: boolean;
 
  private map:any;
 
   constructor(public servicio_comunica_datos: ComunicarDatosItemService,
     private servicio_tts:TtsService,
-    private storage_service:StorageService) {
+    private storage_service:StorageService,
+    private itemTypeService:ItemTypeService) {
     this.itemSeleccionado = new Item();
     this.itemSeleccionado = this.servicio_comunica_datos.currentItem;
+    this.isVisitado = false;
     
   }
 
@@ -33,11 +38,11 @@ export class FichaItemPage implements OnInit {
 
   async ionViewWillEnter(){
     this.backLink = await this.storage_service.get('BackLink');
-    //this.backLink  = localStorage.getItem('Back-link');    
     this.actualizarItem();    
     this.almacenado=false;
     this.comprobarFavoritos();
-    console.log(this.itemSeleccionado.id)
+    this.comprobarVisitados();
+    this.itemType = this.itemTypeService.itemType;
   }
 
   ionViewDidEnter(){    
@@ -91,22 +96,13 @@ export class FichaItemPage implements OnInit {
 
   async almacenarFavoritos(){
     let lista_favoritos = new Array();
-    //if(!localStorage.getItem('lista_favoritos'))
     if((await this.storage_service.get('listaFavoritos'))==null){
-      
       lista_favoritos.push(this.itemSeleccionado);
       this.storage_service.set('listaFavoritos', JSON.stringify(lista_favoritos))
-      
-      //localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
     }else{
       lista_favoritos = JSON.parse(await this.storage_service.get('listaFavoritos'));
       lista_favoritos.push(this.itemSeleccionado);
       this.storage_service.set('listaFavoritos', JSON.stringify(lista_favoritos))
-    
-      
-      //lista_favoritos = JSON.parse(localStorage.getItem('lista_favoritos'));
-      //lista_favoritos.push(this.itemSeleccionado);
-      //localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
     }
   }
 
@@ -114,41 +110,20 @@ export class FichaItemPage implements OnInit {
 
   async almacenarVisitados(){
     let lista_visitados = new Array();
-    //if(!localStorage.getItem('lista_favoritos'))
+
     if((await this.storage_service.get('listaVisitados'))==null){
       
       lista_visitados.push(this.itemSeleccionado);
       this.storage_service.set('listaVisitados', JSON.stringify(lista_visitados))
       
-      //localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
     }else{
+
       lista_visitados = JSON.parse(await this.storage_service.get('listaVisitados'));
       lista_visitados.push(this.itemSeleccionado);
-      this.storage_service.set('listaVisitados', lista_visitados)
-    
-      
-      //lista_favoritos = JSON.parse(localStorage.getItem('lista_favoritos'));
-      //lista_favoritos.push(this.itemSeleccionado);
-      //localStorage.setItem('lista_favoritos', JSON.stringify(lista_favoritos))
+      this.storage_service.set('listaVisitados',JSON.stringify(lista_visitados))
     }
-
-    this.eliminarFavorito(this.itemSeleccionado.id);
-
-    
+    this.eliminarFavorito(this.itemSeleccionado.id); 
   }
-
-  /*almacenarVisitados(){
-    let lista_visitados = new Array();
-    if(!localStorage.getItem('lista_visitados')){
-      lista_visitados.push(this.itemSeleccionado);
-      localStorage.setItem('lista_visitados', JSON.stringify(lista_visitados))
-    }else{
-      lista_visitados = JSON.parse(localStorage.getItem('lista_visitados'));
-      lista_visitados.push(this.itemSeleccionado);
-      localStorage.setItem('lista_visitados', JSON.stringify(lista_visitados))
-    }
-    
-  }*/
 
   async eliminarFavorito(id:string){
     let i:number = 0;
@@ -158,11 +133,8 @@ export class FichaItemPage implements OnInit {
     }else{
       lista_favoritos.forEach(item=>{
         if(item.id == id){
-  
           lista_favoritos.splice(i,1);
-          this.storage_service.set('listaFavoritos', JSON.stringify(lista_favoritos))
-          //localStorage.setItem('lista_favoritos', JSON.stringify(this.lista_favoritos))
-  
+          this.storage_service.set('listaFavoritos', JSON.stringify(lista_favoritos))  
         }
       i++;
       })
@@ -181,5 +153,16 @@ export class FichaItemPage implements OnInit {
     }
   }
 
-
+  async comprobarVisitados(){
+    let lista_visitados = new Array();
+    if(await this.storage_service.get('listaVisitados')!==null){
+      lista_visitados = JSON.parse(await this.storage_service.get('listaVisitados'))
+      lista_visitados.forEach(item=>{
+        if(item.id == this.itemSeleccionado.id){
+          this.almacenado = true;
+          this.isVisitado = true;
+        }
+      })
+    }
+  }
 }

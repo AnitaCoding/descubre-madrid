@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'ficha-item',
         loadChildren: () => import('../ficha-item/ficha-item.module').then( m => m.FichaItemPageModule)
+      },
+      {
+        path: 'lista-visitados',
+        loadChildren: () => import('../lista-visitados/lista-visitados.module').then( m => m.ListaVisitadosPageModule)
       }
       
 

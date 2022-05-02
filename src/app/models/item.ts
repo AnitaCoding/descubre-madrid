@@ -12,6 +12,7 @@ export class Item {
     location: any;
     references: string;
     icon: IconProp;
+    tipoItem: string;
 
     constructor(){
         this.id = '';
@@ -21,5 +22,6 @@ export class Item {
         this.relation = '';
         this.schedule='';
         this.references = '';
+        this.tipoItem='';
     }
 }

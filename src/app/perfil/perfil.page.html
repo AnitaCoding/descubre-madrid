@@ -7,11 +7,19 @@
 <ion-content>
   <div id="container">
   <div class="header">
+    <div class="box-header" *ngIf="!edicionNombre">    
+      <h1 class="title">{{nombreUsuario}}</h1>
+      <fa-icon icon="pen-to-square" (click)="editarNombre()"></fa-icon>
+    </div>
+
     
-    <h1 class="title">{{nombreUsuario}}</h1>
-    <fa-icon icon="pen-to-square" (click)="editarNombre()"></fa-icon>
+    <div class="box-header" *ngIf="edicionNombre">
+      <ion-input [(ngModel)]="nombreUsuario" placeholder="Introduce tu nombre"></ion-input>
+      <fa-icon icon="check" class="check-icon" (click)="editarNombre()"></fa-icon>
+    </div>
 
   </div>
+
 
   <div >
     <h2 >Resumen de lugares visitados</h2>
@@ -42,35 +50,35 @@
 
   </div>
    
-    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('monumentos')">
+    <ion-card class="body-button" [routerLink]="['/lista-visitados']" (click)="actualizaItemType('monumentos')">
       <ion-item color="primary" class="ion-activated body-button">
         <fa-icon icon="monument"></fa-icon>
         <ion-label>Monumentos</ion-label>
       </ion-item>
     </ion-card>
   
-    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('edificios')">
+    <ion-card class="body-button" [routerLink]="['/lista-visitados']" (click)="actualizaItemType('edificios')">
       <ion-item color="primary" href="#" class="ion-activated body-button">
         <fa-icon icon="landmark-dome"></fa-icon>
         <ion-label>Edificios</ion-label>
       </ion-item>
     </ion-card>
   
-    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('museos')">
+    <ion-card class="body-button" [routerLink]="['/lista-visitados']" (click)="actualizaItemType('museos')">
       <ion-item color="primary" href="#" class="ion-activated body-button">
         <fa-icon icon="building-columns"></fa-icon>
         <ion-label>Museos</ion-label>
       </ion-item>
     </ion-card>
   
-    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('parques')">
+    <ion-card class="body-button" [routerLink]="['/lista-visitados']" (click)="actualizaItemType('parques')">
       <ion-item color="primary" href="#" class="ion-activated body-button">
         <fa-icon icon="tree"></fa-icon>
         <ion-label>Parques y jardines</ion-label>
       </ion-item>
     </ion-card>
   
-    <ion-card class="body-button" [routerLink]="['/item-list']" (click)="actualizaItemType('oficinas de turismo')">
+    <ion-card class="body-button" [routerLink]="['/lista-visitados']" (click)="actualizaItemType('oficinas de turismo')">
       <ion-item color="primary" href="#" class="ion-activated body-button">
         <fa-icon icon="circle-info"></fa-icon>
         <ion-label>Oficinas de turismo</ion-label>

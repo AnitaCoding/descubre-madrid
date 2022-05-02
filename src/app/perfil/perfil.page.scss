@@ -31,6 +31,15 @@
       justify-content: center;
   }
 
+  .box-header{
+    display: flex;
+    align-items: baseline;
+  }
+
+  .check-icon{
+    padding-left: 1rem;
+  }
+
   h1{
       padding-right: 1rem;
   }
@@ -50,11 +59,16 @@
        font-size: 1rem;
    }
 
+   ion-input{
+     border: 1px solid rgb(0, 23, 92);
+     border-radius: 10px;
+   }
+
   .box-visitados{
       display: flex;
       flex-direction: column;
       padding: 0 1.5rem;
-      border-right: 0.1rem solid #000;
+      border-right: 0.1rem solid rgb(0, 23, 92);
   }
 
   .box-visitados:last-child{

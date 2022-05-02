@@ -16,7 +16,7 @@
 
   <div class="action-box">
     <ion-button *ngIf="!almacenado" color="primary" (click)="almacenarFavoritos()"><fa-icon icon="heart"></fa-icon></ion-button>
-    <ion-button *ngIf="almacenado" color="primary" (click)="almacenarVisitados()"><fa-icon icon="check"></fa-icon></ion-button>
+    <ion-button *ngIf="almacenado" color="primary" (click)="almacenarVisitados()" [disabled]="isVisitado"><fa-icon icon="check"></fa-icon></ion-button>
     <ion-button color="primary"><fa-icon icon="headphones-simple" (click)="escuchar()"></fa-icon></ion-button>
     <ion-button color="primary"><fa-icon icon="location-dot"></fa-icon></ion-button>
     <ion-button color="primary" href={{itemSeleccionado.references}}><fa-icon icon="circle-info"></fa-icon></ion-button>

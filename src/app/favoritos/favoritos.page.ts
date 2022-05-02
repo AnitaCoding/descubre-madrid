@@ -13,7 +13,6 @@ export class FavoritosPage implements OnInit {
   backLink: string = 'favoritos';
   constructor(public servicio_comunica_datos: ComunicarDatosItemService,
     private storage_service: StorageService) {
-    //this.existeLista();
     this.lista_favoritos = new Array<Item>();
    }
 
@@ -23,8 +22,6 @@ export class FavoritosPage implements OnInit {
   ionViewWillEnter(){
     this.existeLista();
     this.storage_service.set('BackLink', this.backLink)
-    //localStorage.setItem('Back-link', this.backLink);
-    console.log('will enter fav')
 
   }
 
@@ -33,15 +30,9 @@ export class FavoritosPage implements OnInit {
   }
 
   async existeLista(){
-    //if(localStorage.getItem('lista_favoritos'))
-    if(await this.storage_service.get('listaFavoritos')==null/*|| await this.storage_service.get('listaFavoritos').length==0*/)
+    if(await this.storage_service.get('listaFavoritos')!=null/*|| await this.storage_service.get('listaFavoritos').length==0*/)
     {
-      alert('añade favoritos')
-      //this.storage_service.set('listaFavoritos', JSON.stringify(this.lista_favoritos))
-      //this.lista_favoritos= JSON.parse(localStorage.getItem('lista_favoritos'));
-    }else{
       this.lista_favoritos = JSON.parse(await this.storage_service.get('listaFavoritos'))
-      //localStorage.setItem ('lista_favoritos',JSON.stringify(this.lista_favoritos))
     }
   }
 
@@ -63,7 +54,6 @@ export class FavoritosPage implements OnInit {
   
           this.lista_favoritos.splice(i,1);
           this.storage_service.set('listaFavoritos', JSON.stringify(this.lista_favoritos))
-          //localStorage.setItem('lista_favoritos', JSON.stringify(this.lista_favoritos))
   
         }
         i++;
