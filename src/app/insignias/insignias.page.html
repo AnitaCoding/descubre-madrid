@@ -1,11 +1,45 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="menu">
     <ion-buttons slot="start">
     </ion-buttons>
-    <ion-title>insignias</ion-title>
+    <ion-title class="title">Insignias</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div class="container-chart-box">
+    <div class="chart-container">
+      <p>{{monumentosInsignia.tituloActual}}</p>
+      <canvas #monumentosCanvas></canvas>
+    </div>
+
+    <div class="chart-container">
+      <p>{{edificiosInsignia.tituloActual}}</p>
+      <canvas #edificiosCanvas></canvas>
+    </div>
+  </div>
+  <div class="container-chart-box">
+    <div class="chart-container">
+      <p>{{museosInsignia.tituloActual}}</p>
+      <canvas #museosCanvas></canvas>
+    </div>
+
+    <div class="chart-container">
+      <p>{{parquesInsignia.tituloActual}}</p>
+      <canvas #parquesCanvas></canvas>
+    </div>
+  </div>
+  <div class="container-chart-box">
+    <div class="chart-container">
+      <p>{{pInfoInsignia.tituloActual}}</p>
+      <canvas #pInfoCanvas></canvas>
+    </div>
+
+    <div class="chart-container">
+      <p>{{todosInsignia.tituloActual}}</p>
+      <canvas #todosCanvas></canvas>
+    </div>
+  </div>
+
 
 </ion-content>
