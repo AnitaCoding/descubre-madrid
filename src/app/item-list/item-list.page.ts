@@ -317,11 +317,9 @@ export class ItemListPage implements OnInit {
       this.map.off();
       this.map.remove();
       this.mapa_activo=false;
-      console.log('cerral')
     }else{
       this.mapa_activo=true;
       this.initMap();
-      console.log('abril')
       this.listaItems.forEach(item =>{
         if(item.location){        
           let circle = L.circle([item.location.latitude, item.location.longitude], {
@@ -346,7 +344,6 @@ export class ItemListPage implements OnInit {
     this.listaItems.forEach(item=>{
       if(id == item.id){
         this.servicio_comunica_datos.currentItem = item;
-        console.log('it l' + this.servicio_comunica_datos.currentItem.id);
       }
     })
   }

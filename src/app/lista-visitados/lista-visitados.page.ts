@@ -17,7 +17,7 @@ export class ListaVisitadosPage implements OnInit {
 
   constructor(private itemTypeService:ItemTypeService,
     private service_storage:StorageService,
-    private servicio_comunica_datos: ComunicarDatosItemService) {
+    public servicio_comunica_datos: ComunicarDatosItemService) {
       this.lista_visitados = new Array<Item>();
       this.lista_aux = new Array<Item>();
      }
@@ -55,6 +55,7 @@ export class ListaVisitadosPage implements OnInit {
     this.lista_aux.forEach(item=>{
       if(id == item.id){
         this.servicio_comunica_datos.currentItem = item;
+        console.log(item.location.latitude)
       }
     })
   }
